@@ -5,3 +5,4 @@ global using Microsoft.EntityFrameworkCore;
 global using Core.Entites;
 global using Infrastructure.Data;
 global using System.Linq;
+global using Core.interfaces;
