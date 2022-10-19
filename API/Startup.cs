@@ -1,4 +1,3 @@
-
 namespace API
 {
     public class Startup
@@ -14,7 +13,11 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(typeof(IGenericREpository<>), (typeof(GenericREpository<>)));
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddAutoMapper(typeof(MappingProfiles));
+
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddDbContext<StoreContext>(x =>
@@ -28,13 +31,12 @@ namespace API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 

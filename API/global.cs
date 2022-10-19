@@ -6,3 +6,6 @@ global using Core.Entites;
 global using Infrastructure.Data;
 global using System.Linq;
 global using Core.interfaces;
+global using API.Dtos;
+global using AutoMapper;
+global using API.Helpers;
