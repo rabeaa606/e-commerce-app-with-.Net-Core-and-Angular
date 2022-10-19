@@ -19,7 +19,7 @@ namespace Infrastructure.Data
             {
                 query = query.Where(spec.Criteria);// Example: p=>p.ProductTpeId ==Id
             }
-            query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+            query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));//add includes
 
             return query;
         }

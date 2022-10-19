@@ -1,3 +1,5 @@
+
+
 namespace API
 {
     public class Startup
@@ -13,25 +15,25 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped(typeof(IGenericREpository<>), (typeof(GenericREpository<>)));
-            services.AddScoped<IProductRepository, ProductRepository>();
+
 
             services.AddAutoMapper(typeof(MappingProfiles));
-
             services.AddControllers();
-            services.AddSwaggerGen();
             services.AddDbContext<StoreContext>(x =>
              x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+
+            //Owen IServiceCollection
+            services.AddApplicationServices();
+            services.AddSwaggerDocumention();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseMiddleware<ExceptionMiddelware>();
+
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
             app.UseHttpsRedirection();
 
@@ -39,6 +41,9 @@ namespace API
             app.UseStaticFiles();
 
             app.UseAuthorization();
+
+            //Owen IApplicationBuilder
+            app.UseSwaggerDocumention();
 
             app.UseEndpoints(endpoints =>
             {
