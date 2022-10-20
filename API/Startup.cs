@@ -25,6 +25,15 @@ namespace API
             //Owen IServiceCollection
             services.AddApplicationServices();
             services.AddSwaggerDocumention();
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CoresPolicy", policy =>
+                {
+                    policy.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins("https://localhost:4200");
+                });
+            });
 
         }
 
@@ -39,6 +48,8 @@ namespace API
 
             app.UseRouting();
             app.UseStaticFiles();
+
+            app.UseCors("CoresPolicy");
 
             app.UseAuthorization();
 
