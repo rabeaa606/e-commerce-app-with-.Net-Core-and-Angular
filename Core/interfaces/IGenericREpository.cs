@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Specifications;
-
 namespace Core.interfaces
 {
     public interface IGenericREpository<T> where T : BaseEntity
@@ -13,5 +7,7 @@ namespace Core.interfaces
 
         Task<T> GetEntityWithSpec(ISpecification<T> spec);
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
+        Task<int> CountAsync(ISpecification<T> spec);
+
     }
 }

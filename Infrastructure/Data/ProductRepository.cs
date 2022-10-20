@@ -1,9 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Core.Entites;
-using Core.interfaces;
-using Microsoft.EntityFrameworkCore;
-
 namespace Infrastructure.Data
 {
     public class ProductRepository : IProductRepository

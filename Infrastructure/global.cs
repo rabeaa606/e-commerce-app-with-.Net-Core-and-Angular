@@ -1,0 +1,12 @@
+global using Core.Entites;
+global using System.Collections.Generic;
+global using System.Threading.Tasks;
+global using System.Linq.Expressions;
+global using Core.Specifications;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Core.interfaces;
+global using System.Reflection;
+global using System.Text.Json;
+global using Microsoft.Extensions.Logging;

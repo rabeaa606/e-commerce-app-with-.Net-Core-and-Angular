@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Core.Entites;
-using Microsoft.Extensions.Logging;
-
 namespace Infrastructure.Data
 {
     public class StoreContextSeed

@@ -1,12 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Entites;
-using Core.interfaces;
-using Core.Specifications;
-using Microsoft.EntityFrameworkCore;
-
 namespace Infrastructure.Data
 {
     public class GenericREpository<T> : IGenericREpository<T> where T : BaseEntity
@@ -34,9 +25,16 @@ namespace Infrastructure.Data
             return await applySpecification(spec).ToListAsync();
         }
 
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            return await applySpecification(spec).CountAsync();
+        }
+
         private IQueryable<T> applySpecification(ISpecification<T> spec)
         {
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
+
+
     }
 }
