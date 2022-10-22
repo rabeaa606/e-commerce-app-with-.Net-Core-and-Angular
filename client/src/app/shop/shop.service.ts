@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { IPagination } from '../shared/models/pagination';
 import { ShopParams } from '../shared/models/shopParams';
+import { IProduct } from '../shared/models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class ShopService {
 
     return this.http
       .get<IPagination>(this.baseUrl + 'products', {
-        observe: 'response',
+        observe: 'response', //http header
         params,
       })
       .pipe(
@@ -39,6 +40,9 @@ export class ShopService {
           return response.body;
         })
       );
+  }
+  getProduct(id: number) {
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
   getTypes() {
     return this.http.get<IType[]>(this.baseUrl + 'products/types');
