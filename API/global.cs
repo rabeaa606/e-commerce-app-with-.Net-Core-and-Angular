@@ -17,3 +17,4 @@ global using System.Net;
 global using System.Text.Json;
 global using API.Middelware;
 global using API.Extensions;
+global using StackExchange.Redis;
