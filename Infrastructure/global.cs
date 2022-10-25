@@ -11,3 +11,4 @@ global using System.Reflection;
 global using System.Text.Json;
 global using Microsoft.Extensions.Logging;
 global using StackExchange.Redis;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

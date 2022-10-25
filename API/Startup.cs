@@ -1,4 +1,5 @@
 
+using Infrastructure.Identity;
 
 namespace API
 {
@@ -19,8 +20,13 @@ namespace API
 
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
+
+            //database
             services.AddDbContext<StoreContext>(x =>
              x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+            //IdentityDbContext
+            services.AddDbContext<AppIdentityDbContext>(x =>
+             x.UseSqlite(_config.GetConnectionString("IdentityConnection")));
 
             //Redis
             services.AddSingleton<IConnectionMultiplexer>(c =>
@@ -34,6 +40,8 @@ namespace API
             //Owen IServiceCollection
             services.AddApplicationServices();
             services.AddSwaggerDocumention();
+            services.AddIdentityServices(_config);
+
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CoresPolicy", policy =>
@@ -60,6 +68,7 @@ namespace API
 
             app.UseCors("CoresPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //Owen IApplicationBuilder

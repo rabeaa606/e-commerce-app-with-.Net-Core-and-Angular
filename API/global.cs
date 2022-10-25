@@ -18,3 +18,4 @@ global using System.Text.Json;
 global using API.Middelware;
 global using API.Extensions;
 global using StackExchange.Redis;
+global using Microsoft.Extensions.Configuration;
