@@ -19,3 +19,4 @@ global using API.Middelware;
 global using API.Extensions;
 global using StackExchange.Redis;
 global using Microsoft.Extensions.Configuration;
+global using System.ComponentModel.DataAnnotations;
