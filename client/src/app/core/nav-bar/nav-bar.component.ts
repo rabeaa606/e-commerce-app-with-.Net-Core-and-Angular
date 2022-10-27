@@ -3,6 +3,8 @@ import { Basket, IBasket } from './../../shared/models/basket';
 import { Component, OnInit } from '@angular/core';
 
 import { BasketService } from './../../basket/basket.service';
+import { AccountService } from 'src/app/account/account.service';
+import { IUser } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,15 +13,18 @@ import { BasketService } from './../../basket/basket.service';
 })
 export class NavBarComponent implements OnInit {
   basket$: Observable<IBasket>;
-  basketCount: number;
+  currentUser$: Observable<IUser>;
 
-  constructor(public basketService: BasketService) {
+  constructor(
+    private basketService: BasketService,
+    private accountService: AccountService
+  ) {}
+
+  ngOnInit(): void {
     this.basket$ = this.basketService.basket$;
-
-    this.basket$.subscribe((res) => {
-      if (res) this.basketCount = res.items.length;
-    });
+    this.currentUser$ = this.accountService.currentUser$;
   }
-
-  ngOnInit(): void {}
+  logout() {
+    this.accountService.logout();
+  }
 }
