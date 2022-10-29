@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Entites.Identity;
-using Microsoft.AspNetCore.Identity;
-
 namespace Infrastructure.Identity
 {
     public class AppIdentityDbContextSeed
@@ -20,7 +13,7 @@ namespace Infrastructure.Identity
                     DisplayName = "Bob",
                     Email = "bob@test.com",
                     UserName = "bob@test.com",
-                    Address = new Address
+                    Address = new Core.Entites.Identity.Address
                     {
                         FirstName = "Bob",
                         LastName = "Bobbity",
@@ -33,10 +26,6 @@ namespace Infrastructure.Identity
                 await userManager.CreateAsync(user, "Pa$$w0rd");
 
             }
-
-
-
-
         }
     }
 }

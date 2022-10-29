@@ -12,3 +12,7 @@ global using System.Text.Json;
 global using Microsoft.Extensions.Logging;
 global using StackExchange.Redis;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Core.Entites.OrderAggregate;
+global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+global using Core.Entites.Identity;
+global using Microsoft.AspNetCore.Identity;
