@@ -9,6 +9,7 @@ namespace API.Extensions
             services.AddScoped(typeof(IGenericREpository<>), (typeof(GenericREpository<>)));
             services.AddScoped<ITokenServcice, TokenService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IProductRepository, ProductRepository>();
