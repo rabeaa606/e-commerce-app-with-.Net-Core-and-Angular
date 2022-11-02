@@ -20,3 +20,18 @@ global using API.Extensions;
 global using StackExchange.Redis;
 global using Microsoft.Extensions.Configuration;
 global using System.ComponentModel.DataAnnotations;
+global using Core.Entites.Identity;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Identity;
+global using Core.Entites.OrderAggregate;
+global using Stripe;
+global using Infrastructure.services;
+global using System.Security.Claims;
+global using System.Threading.Tasks;
+global using System.Text;
+global using Infrastructure.Identity;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.IdentityModel.Tokens;
+global using Microsoft.AspNetCore.Mvc.Filters;
+global using Microsoft.Extensions.FileProviders;
+

@@ -5,5 +5,6 @@ global using System.Linq.Expressions;
 global using Core.Specifications;
 global using Microsoft.AspNetCore.Identity;
 global using System.ComponentModel.DataAnnotations;
-global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using System.Runtime.Serialization;
 global using Core.Entites.OrderAggregate;
+global using Core.Entites.Identity;

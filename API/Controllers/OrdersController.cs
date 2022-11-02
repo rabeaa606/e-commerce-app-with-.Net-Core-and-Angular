@@ -1,67 +1,56 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Entites.OrderAggregate;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Order = Core.Entites.OrderAggregate.Order;
+namespace API.Controllers;
 
-namespace API.Controllers
+[Authorize]
+public class OrdersController : BaseApiController
 {
-    [Authorize]
-    public class OrdersController : BaseApiController
+    private readonly IOrderService _orderService;
+    private readonly IMapper _mapper;
+    public OrdersController(IOrderService orderService, IMapper mapper)
     {
-        private readonly IOrderService _orderService;
-        private readonly IMapper _mapper;
-        public OrdersController(IOrderService orderService, IMapper mapper)
-        {
-            _mapper = mapper;
-            _orderService = orderService;
-        }
+        _mapper = mapper;
+        _orderService = orderService;
+    }
 
-        [HttpPost]
-        public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
-        {
-            var email = User.RetrieveEmailFromPrincipal();
+    [HttpPost]
+    public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
+    {
+        var email = User.RetrieveEmailFromPrincipal();
 
-            var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
+        var address = _mapper.Map<AddressDto, Core.Entites.OrderAggregate.Address>(orderDto.ShipToAddress);
 
-            var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
+        var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
 
-            if (order == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
+        if (order == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
 
-            return Ok(order);
-        }
+        return Ok(order);
+    }
 
-        [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetOrdersForUser()
-        {
-            var email = User.RetrieveEmailFromPrincipal();
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetOrdersForUser()
+    {
+        var email = User.RetrieveEmailFromPrincipal();
 
-            var orders = await _orderService.GetOrdersForUserAsync(email);
+        var orders = await _orderService.GetOrdersForUserAsync(email);
 
-            return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders));
-        }
+        return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders));
+    }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
-        {
-            var email = User.RetrieveEmailFromPrincipal();
+    [HttpGet("{id}")]
+    public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
+    {
+        var email = User.RetrieveEmailFromPrincipal();
 
-            var order = await _orderService.GetOrderByIdAsync(id, email);
+        var order = await _orderService.GetOrderByIdAsync(id, email);
 
-            if (order == null) return NotFound(new ApiResponse(404));
+        if (order == null) return NotFound(new ApiResponse(404));
 
-            return _mapper.Map<OrderToReturnDto>(order);
-        }
+        return _mapper.Map<OrderToReturnDto>(order);
+    }
 
-        [HttpGet("deliveryMethods")]
-        public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
-        {
-            return Ok(await _orderService.GetDeliveryMethodsAsync());
-        }
+    [HttpGet("deliveryMethods")]
+    public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
+    {
+        return Ok(await _orderService.GetDeliveryMethodsAsync());
     }
 }

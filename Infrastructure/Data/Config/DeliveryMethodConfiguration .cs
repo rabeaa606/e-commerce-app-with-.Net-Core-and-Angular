@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Entites.OrderAggregate;
 
-namespace Infrastructure.Data.Config
+
+namespace Infrastructure.Data.Config;
+
+public class DeliveryMethodConfiguration : IEntityTypeConfiguration<DeliveryMethod>
 {
-
-    public class DeliveryMethodConfiguration : IEntityTypeConfiguration<DeliveryMethod>
+    public void Configure(EntityTypeBuilder<DeliveryMethod> builder)
     {
-        public void Configure(EntityTypeBuilder<DeliveryMethod> builder)
-        {
-            builder.Property(d => d.Price)
-                .HasColumnType("decimal(18,2)");
-        }
+        builder.Property(d => d.Price)
+            .HasColumnType("decimal(18,2)");
     }
 }

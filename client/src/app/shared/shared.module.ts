@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 
@@ -30,6 +30,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
+    FormsModule,
     CdkStepperModule,
     RouterModule,
   ],
@@ -37,6 +38,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
     CarouselModule,
     CdkStepperModule,
     ReactiveFormsModule,
+    FormsModule,
     BsDropdownModule,
     PaginationModule,
 

@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Entites.OrderAggregate;
+using Address = Core.Entites.OrderAggregate.Address;
 
-namespace Core.interfaces
+namespace Core.interfaces;
+public interface IOrderService
 {
-    public interface IOrderService
-    {
-        Task<Order> CreateOrderAsync(string buyerEmail, int delieveryMethod, string basketId, Address shippingAddress);
-        Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail);
-        Task<Order> GetOrderByIdAsync(int id, string buyerEmail);
-        Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync();
-    }
+    Task<Order> CreateOrderAsync(string buyerEmail, int delieveryMethod, string basketId, Address shippingAddress);
+    Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail);
+    Task<Order> GetOrderByIdAsync(int id, string buyerEmail);
+    Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync();
 }

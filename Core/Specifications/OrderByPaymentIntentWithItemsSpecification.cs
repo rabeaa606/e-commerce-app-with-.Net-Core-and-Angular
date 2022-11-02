@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Core.Specifications
+
+namespace Core.Specifications;
+public class OrderByPaymentIntentIdSpecification : BaseSpecification<Order>
 {
-    public class OrderByPaymentIntentIdSpecification : BaseSpecification<Order>
+    public OrderByPaymentIntentIdSpecification(string paymentIntentId)
+      : base(o => o.PaymentIntentId == paymentIntentId)
     {
-        public OrderByPaymentIntentIdSpecification(string paymentIntentId)
-          : base(o => o.PaymentIntentId == paymentIntentId)
-        {
-        }
     }
 }
